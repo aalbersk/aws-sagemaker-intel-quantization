@@ -39,9 +39,7 @@ class CodeGenHandler(BaseHandler, ABC):
     def initialize(self, ctx: Context):
         logger.info(f"Params: {ctx.model_yaml_config['handler']}")
         model_name = ctx.model_yaml_config["handler"]["model_name"]
-        # path to quantized model, if we are quantizing on the fly, we'll use this path to save the model
-        self.quantized_model_path = ctx.model_yaml_config["handler"]["quantized_model_path"]
-        
+
         # generation params
         self.batch_size = int(ctx.model_yaml_config["handler"]["batch_size"])
         self.max_length = int(ctx.model_yaml_config["handler"]["max_length"])
@@ -252,8 +250,6 @@ class CodeGenHandler(BaseHandler, ABC):
                 self_jit = torch.jit.trace(self.user_model.eval(), example_inputs, strict=False, check_trace=False)
                 self_jit = torch.jit.freeze(self_jit.eval())
 
-                self_jit.save(self.quantized_model_path)
-
             logger.info("The IPEX Weight only quantization has been completed successfully")
             
         # set PAD token
@@ -262,17 +258,6 @@ class CodeGenHandler(BaseHandler, ABC):
         
 
         if self.benchmark:
-            print("Loading the quantized model")
-            # Quantizing the model may be needed before loading the quantized jit 
-
-            try:
-                self_jit = torch.jit.load(self.quantized_model_path)
-                self_jit = torch.jit.freeze(self_jit.eval())
-                print(self_jit)
-            except Exception as e:
-                logger.error("Error: loading the model failed.", e)
-                exit(0)
-        
             setattr(self.user_model, "trace_graph", self_jit)
             logger.info("Successfully loaded the Model %s with Intel® Extension for PyTorch*", ctx.model_name)
 

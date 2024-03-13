@@ -27,19 +27,34 @@ Boost the performance of your ML inference workloads on Amazon SageMaker using I
 ## Available Intel Xeon-based EC2 Instances
 Amazon EC2 offers a range of Intel Xeon-based instances suitable for various workloads:
 
-* *C7i Instances*: Powered by 4th generation Intel Xeon Scalable processors, C7i instances contain Intel® Advanced Matrix Extensions(AMX) and combined with other extensions(AVX512, AVX512 VNNI) are even more optimized for AI/ML workloads than their predecessors. Read more about C7i instances: https://aws.amazon.com/ec2/instance-types/c7i/
+* *C7i Instances*: Powered by 4th generation Intel Xeon Scalable processors, C7i instances contain Intel® Advanced Matrix Extensions(AMX) and combined with other Intel extensions(AVX512, AVX512 VNNI) are even more optimized for AI/ML workloads than their predecessors. Read more about C7i instances: https://aws.amazon.com/ec2/instance-types/c7i/
 * *C6i Instances*: Powered by 3rd generation Intel Xeon Scalable processors, C6i instances are optimized for AI/ML workloads and thanks to containing AVX-512 and AVX-512 Vector Neural Network Instructions (VNNI) extensions offer excellent performance for deep learning inference tasks. Read more about C6i instances: https://aws.amazon.com/ec2/instance-types/c6i/
 * *Other Intel Xeon Instances*: In addition to C7i and C6i instances, EC2 provides various other instance types featuring Intel Xeon processors, such as C5, M6i, and R6i instances. Each instance type is tailored to different use cases and offers distinct combinations of compute, memory, and networking resources.
 
 ## Prerequisites
-TODO: add more descriptive information about prerequisites
 In order to successfuly run the examples to need to ensure that you have access to the following:
-* Linux shell terminal with AWS CLI installed.
-* AWS account with access to EC2 (C6i instance type) instance creation.
-* SageMaker access for model deployment.
-* IAM access for configuring roles and policies.
-* Access to Elastic Container Registry (ECR).
-* S3 bucket for uploading models and code.
+
+* **Linux shell terminal with AWS CLI installed**
+* **IAM access for configuring roles and policies**
+
+    Running AWS examples in Sagemaker requires following accesses either in an account or a role that you're using:
+    ```
+    -- AmazonEC2ContainerRegistryFullAccess
+    -- AmazonEC2FullAccess
+    -- AmazonSageMakerFullAccess
+    -- AmazonS3FullAccess
+    ```
+
+* **AWS account with access to EC2 instance creation that runs Intel Xeon-based Hardware**
+
+    Refer to [Available Intel Xeon-based EC2 Instances](#available-intel-xeon-based-ec2-instances) for more information regarding Intel Xeon-based EC2 Instances.
+
+* **SageMaker access for model deployment**
+
+    You can deploy the model either by using an AWS Sagemaker Notebook instance or by running AWS CLI commands within a shell terminal.
+
+* **Access to Elastic Container Registry (ECR)**
+* **S3 bucket for uploading models and code**
 
 ## Usage
 1. **Launch EC2 instance**: Create an EC2 instance with C6i instance type and Ubuntu 20.04 Linux AMI.
@@ -56,7 +71,7 @@ In order to successfuly run the examples to need to ensure that you have access 
 
 ### Bert Flask
 
-See [add link] for more information.
+See [Bert Flask example](bert_flask/README.md) for more information.
 
 ### Codegen
 

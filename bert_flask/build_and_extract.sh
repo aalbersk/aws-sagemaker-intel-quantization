@@ -45,9 +45,10 @@ $(aws ecr get-login --region ${region} --no-include-email)
 
 # Build the docker image locally with the image name and then push it to ECR
 # with the full name.
-
-docker build  -t ${image} .
+docker build  -t ${image} -f docker/Dockerfile_GenModel .
 docker tag ${image} ${fullname}
 
-docker push ${fullname}
-#docker save --output image_class.tar ${image}
+docker create --name temp_container ${fullname}
+docker cp temp_container:/opt/program/both_bert_model-test.tar.gz . 
+docker rm -f temp_container
+

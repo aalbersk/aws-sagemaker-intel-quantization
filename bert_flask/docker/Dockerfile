@@ -1,13 +1,12 @@
 # Build an image that can do inference in SageMaker
-# This is a Python image that uses the nginx, gunicorn, flask stack
+# This is a Python 2 image that uses the nginx, gunicorn, flask stack
 
 FROM public.ecr.aws/ubuntu/ubuntu:20.04_stable
-
 # See http://bugs.python.org/issue19846
 ENV LANG C.UTF-8
 ARG PYTHON=python3
 		 
-RUN apt-get update && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata
+RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y tzdata
 
 RUN apt-get -y update && apt-get install -y --no-install-recommends --fix-missing \
          wget \
@@ -60,7 +59,7 @@ RUN ${PYTHON} -m pip install --no-cache-dir \
 
 RUN ln -sf /usr/lib/x86_64-linux-gnu/libjemalloc.so /usr/lib/x86_64-linux-gnu/libtcmalloc.so
 ENV DNNL_MAX_CPU_ISA="AVX512_CORE_AMX"
-ENV LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libjemalloc.so:/usr/local/lib/libiomp5.so:/usr/lib/x86_64-linux-gnu/libtcmalloc.so":${LD_PRELOAD}
+ENV LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libjemalloc.so:/usr/local/lib/libiomp5.so:/usr/lib/x86_64-linux-gnu/libtcmalloc.so:${LD_PRELOAD}"
 
 # Here we install the extra python packages to run the inference code
 RUN pip install flask gevent gunicorn && \
@@ -82,6 +81,3 @@ COPY bert_flask /opt/program
 RUN chmod 755 /opt/program
 WORKDIR /opt/program
 RUN chmod 755 serve
-
-RUN python quantize_with_ds_ep.py 
-RUN tar -czf both_bert_model-test.tar.gz model_int8.pt model_fp32.pt tokenizer.json vocab.txt special_tokens_map.json tokenizer_config.json 

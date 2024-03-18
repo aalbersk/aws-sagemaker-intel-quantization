@@ -1,12 +1,10 @@
 
 # Accelerate Amazon SageMaker inference with 3rd and 4th Gen Intel® Xeon® Scalable Processors
 
-TODO: move docker and build files to bert_flask and check whether it works
-
-![Architecture](img/SageMaker-c6i-Inference.png)
+![Architecture](img/Sagemaker_intel_inference.png)
 
 ## Overview
-Boost the performance of your ML inference workloads on Amazon SageMaker using Intel-based EC2 instances (C6i). By leveraging Intel's INT8 inference deployment, you can achieve up to 4x performance improvement per dollar spent while maintaining inference accuracy.
+Boost the performance of your ML inference workloads on Amazon SageMaker using Intel-based EC2 instances (C7i with 4th Gen Intel® Xeon® Scalable Processors and C6i containing 3rd Gen Intel® Xeon® Scalable Processors). By leveraging Intel's INT8 inference deployment, you can achieve up to 4x performance improvement per dollar spent while maintaining inference accuracy.
 
 ## Table of Contents
 1. [Technology Highlights](#technology-highlights)
@@ -20,7 +18,7 @@ Boost the performance of your ML inference workloads on Amazon SageMaker using I
 7. [License](#license)
 
 ## Technology Highlights
-* Amazon EC2 C7i instances utilize 3rd generation Intel Xeon Scalable processors (Ice Lake) with enhanced performance capabilities. These instances support both FP32, BF16 and INT8 model deployments, offering significant performance advantages.
+* Amazon EC2 C7i instances utilize 4th generation Intel Xeon Scalable processors (Sapphire Rapids) with enhanced performance capabilities. These instances support both FP32, BF16 and INT8 model deployments, offering significant performance advantages.
 * Amazon EC2 C6i instances utilize 3rd generation Intel Xeon Scalable processors (Ice Lake) with enhanced performance capabilities. These instances support both FP32 and INT8 model deployments, offering significant performance advantages.
 * Integrate deep learning models seamlessly with SageMaker endpoints for efficient real-time inference.
 
@@ -72,10 +70,6 @@ In order to successfuly run the examples to need to ensure that you have access 
 ### Bert Flask
 
 See [Bert Flask example](bert_flask/README.md) for more information.
-
-### Codegen
-
-See [add link] for more information.
 
 ## Security
 

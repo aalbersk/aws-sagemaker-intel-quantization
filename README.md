@@ -71,6 +71,10 @@ In order to successfuly run the examples to need to ensure that you have access 
 
 See [Bert Flask example](bert_flask/README.md) for more information.
 
+### Codegen
+
+See [Codegen example](codegen_example) for more information.
+
 ## Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.

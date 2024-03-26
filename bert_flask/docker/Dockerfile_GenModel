@@ -1,5 +1,5 @@
-# Build an image that can do inference in SageMaker
-# This is a Python image that uses the nginx, gunicorn, flask stack
+# Copyright (c) 2022 Intel Corporation
+# SPDX-License-Identifier: MIT-0
 
 FROM public.ecr.aws/ubuntu/ubuntu:20.04_stable
 
